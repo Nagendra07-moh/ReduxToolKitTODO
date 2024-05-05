@@ -1,10 +1,10 @@
 import { View, Text, TextInput, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
 const Todo = () => {
+  const todos = useSelector((state) => state.todos);
   const [text, setText] = useState("");
-  //   const todos = useTODOStore((state) => state.todos);
-  const [todos, setTodods] = useState([]);
   const renderItem = ({ item }) => (
     <View style={{ margin: 10, flexDirection: "row" }}>
       <Text style={{ color: "white", fontSize: 20, marginRight: 10 }}>
