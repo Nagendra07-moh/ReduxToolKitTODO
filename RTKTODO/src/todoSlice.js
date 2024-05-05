@@ -7,11 +7,14 @@ export const todoSlice = createSlice({
     addTodo: (state, action) => {
       state.push(action.payload);
     },
+    removeTodo: (state, action) => {
+      return (state = state.filter((todo) => todo.id !== action.payload));
+    },
   },
 });
 
 // this is for dispatch
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, removeTodo } = todoSlice.actions;
 
 // this is for configureStore
 export default todoSlice.reducer;

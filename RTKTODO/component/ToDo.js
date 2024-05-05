@@ -2,9 +2,12 @@ import { View, Text, TextInput, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
+import { addTodo, removeTodo } from "../src/todoSlice";
 const Todo = () => {
   const todos = useSelector((state) => state.todos);
   const [text, setText] = useState("");
+  const dispatch = useDispatch();
+
   const renderItem = ({ item }) => (
     <View style={{ margin: 10, flexDirection: "row" }}>
       <Text style={{ color: "white", fontSize: 20, marginRight: 10 }}>
@@ -23,19 +26,20 @@ const Todo = () => {
       </View>
     </View>
   );
+  const HandleRemove = (id) => {
+    dispatch(removeTodo(id));
+  };
 
   const HandleAdd = () => {
-    if (text.length) {
+    dispatch(
       addTodo({
         id: todos.length + 1,
         item: text,
-      });
-      setText("");
-    }
+      })
+    );
+    setText("");
   };
-  //   useEffect(() => {
-  //     console.log(todos);
-  //   }, [todos]);
+
   return (
     <View>
       <View
@@ -78,7 +82,7 @@ const Todo = () => {
           name="pluscircle"
           size={34}
           color="black"
-          //   onPress={HandleAdd}
+          onPress={HandleAdd}
         />
       </View>
     </View>
